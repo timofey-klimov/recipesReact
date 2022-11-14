@@ -14,11 +14,11 @@ export async function getAsync<T>(url: string): Promise<IApiResponse<T>> {
 
       }
    } catch(e:any) {
-      const data = e.response.data;
+      const data = e?.response?.data;
       return {
          success : false,
-         code: e.response.status,
-         error: data.description
+         code: e?.response?.status,
+         error: data?.description
       } as IApiResponse<T>
    }
 }
@@ -46,11 +46,11 @@ export async function postAsync<T>(url: string, data: any): Promise<IApiResponse
          success: response.data.success
       }
    } catch (e: any) {
-      const data = e.response.data;
+      const data = e?.response?.data;
       return {
          success : false,
-         code: e.response.status,
-         error: data.description
+         code: e?.response?.status,
+         error: data?.description
       } as IApiResponse<T>
    }
 }

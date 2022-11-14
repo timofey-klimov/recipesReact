@@ -1,24 +1,16 @@
-import React, { useEffect } from 'react';
-import { useAppDispatch } from '../../core/hooks/useAppDispatch';
-import { useAppSelector } from '../../core/hooks/useAppSelector';
-import { fetchRecipeCardsThunk } from '../../store/recipeCards/getRecipeCards/getRecipeCards.thunk';
-import { Loader } from '../../ui/Loader/Loader';
+import React from 'react';
+import { IRecipeCard } from '../../models/recipes/recipeCard.model';
 import { RecipeCard } from '../RecipeCard/RecipeCard';
 import './RecipeCardList.scss';
 
-export const RecipeCardList: React.FC = () => {
+interface IProps {
+   cards?: IRecipeCard[]
+}
 
-   const dipatch = useAppDispatch();
-   const cards = useAppSelector(x => x.recipeCards.cards.pageData?.data);
-   const loading = useAppSelector(x => x.recipeCards.cards.isLoading);
-   
-   useEffect(() => {
-      dipatch(fetchRecipeCardsThunk())
-   }, [])
+export const RecipeCardList: React.FC<IProps> = ({cards}) => {
 
    return (
       <>
-      <Loader loading={loading}/>
       <div className='recipe__cards'>
          {cards?.map(recipe => (
             <RecipeCard {...recipe} key={recipe.id}/>

@@ -1,19 +1,30 @@
 import React from 'react';
-import { BounceLoader, ClockLoader, DotLoader, HashLoader, MoonLoader } from 'react-spinners';
+import { HashLoader } from 'react-spinners';
 import './Loader.scss';
 
 interface IProps {
    loading: boolean;
+   fullScreen?: boolean;
 }
 
-export const Loader: React.FC<IProps> = ({loading}) => {
+export const Loader: React.FC<IProps> = ({loading, fullScreen}) => {
+
+   const loader = (loading: boolean) => {
+      return  <HashLoader color='#0d9488' loading={loading} style={{
+         top:'50%',
+         left: '50%',
+         position: 'fixed'
+      }}/>
+   }
+
    return (
-      <div>
-         <HashLoader color='#36d7b7' loading={loading} style={{
-            top:'50%',
-            left: '50%',
-            position: 'fixed'
-         }}/>
-      </div>
-   )
+      <>
+      {
+         fullScreen && loading
+         ? <div className='spinner_wrapper'>
+            {loader(loading)}
+            </div>
+         : loader(loading)
+      }
+      </> )
 }

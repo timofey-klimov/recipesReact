@@ -62,7 +62,7 @@ export const CreateRecipePage: React.FC = () => {
             </FormProvider>
          </div>
       </div>
-      <Loader loading={isLoading}/>
+      <Loader loading={isLoading} fullScreen/>
       <ToastContainer autoClose={2000}/>
       </>
    )
