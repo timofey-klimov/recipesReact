@@ -1,0 +1,8 @@
+.main__container {
+   padding: 7rem 6rem;
+   min-height: 100vh;
+   
+   @media (max-width:426px) {
+      padding: 7rem 2rem;
+   }
+}

@@ -1,0 +1,28 @@
+.stage_form {
+   .main_info {
+      display: grid;
+      align-items: center;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+   }
+
+   .stage_header {
+      h2 {
+         font-size: 1.2rem;
+      }
+      display: flex;
+      align-items: center;
+   }
+
+   @media(max-width:426px) {
+      .main_info {
+         display: block;
+         margin-top: 7px;
+         textarea {
+            margin-top: 10px;
+         }
+      }
+   }
+
+
+}

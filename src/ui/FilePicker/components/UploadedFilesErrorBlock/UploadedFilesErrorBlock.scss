@@ -1,0 +1,16 @@
+.file_error{
+   background-color: #F9CFC6;
+   margin-top: 10px;
+   padding: 5px;
+   border-radius: 5px;
+   display: flex;
+   align-items: center;
+
+   span {
+      margin-left: 5px;
+   }
+
+   @media (max-width: 426px) {
+      font-size: 12px;
+   }
+}
