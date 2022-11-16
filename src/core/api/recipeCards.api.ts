@@ -1,5 +1,6 @@
 import { IRecipeCard } from "../../models/recipes/recipeCard.model"
-import { getPageAsync, postAsync } from "./api.core";
+import { IRecipeDetails } from "../../models/recipes/recipeDetails.model";
+import { getAsync, getPageAsync, postAsync } from "./api.core";
 import { IApiResponse, PaginationResponse } from "./respose.model";
 
 export async function getRecipeCardsAsync(): Promise<PaginationResponse<IRecipeCard>> {
@@ -20,4 +21,8 @@ export async function createRecipeCardAsync(request: {
   formData.append('mealType', request.mealType);
   formData.append('file', request.file);
   return await postAsync('recipe-cards/create', formData)
+}
+
+export async function getRecipeDetailsAsync(id: number): Promise<IApiResponse<IRecipeDetails>> {
+  return await getAsync(`recipe-cards/details/${id}`);
 }

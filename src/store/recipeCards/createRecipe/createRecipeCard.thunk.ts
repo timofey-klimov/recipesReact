@@ -4,8 +4,6 @@ import { createIngredientsAsync } from "../../../core/api/ingredients.api";
 import { createRecipeCardAsync } from "../../../core/api/recipeCards.api";
 import { ICreateRecipeRequest } from "../../../models/recipes/createRecipe.model";
 import { toast } from 'react-toastify';
-import { useNavigate, useNavigation } from "react-router";
-
 
 export const createRecipeCardThunk = createAsyncThunk<void, ICreateRecipeRequest, { rejectValue: string}>(
    'recipeCards/createCard',
@@ -26,7 +24,7 @@ export const createRecipeCardThunk = createAsyncThunk<void, ICreateRecipeRequest
 
       if (!createCardResponse.success) {
          const {code,error} = createCardResponse;
-         const message = createMessage(code, error!);
+         const message = createMessage(code!, error!);
          toast.error(message);
          return rejectWithValue(message);
       }
@@ -38,7 +36,7 @@ export const createRecipeCardThunk = createAsyncThunk<void, ICreateRecipeRequest
 
       if (!createIngredientsResponse.success) {
          const {code,error} = createIngredientsResponse;
-         const message = createMessage(code, error!);
+         const message = createMessage(code!, error!);
          toast.error(message);
          return rejectWithValue(message);
       }
@@ -52,7 +50,7 @@ export const createRecipeCardThunk = createAsyncThunk<void, ICreateRecipeRequest
 
          if (!response.success) {
             const {code,error} = response;
-            const message = createMessage(code, error!);
+            const message = createMessage(code!, error!);
             toast.error(message);
             return rejectWithValue(message);
          }

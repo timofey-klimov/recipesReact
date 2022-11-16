@@ -4,6 +4,7 @@ import './App.css';
 import { Layout } from './components/Layout/Layout';
 import { CreateRecipePage } from './pages/CreateRecipePage/CreateRecipePage';
 import { MainPage } from './pages/MainPage/MainPage';
+import { RecipePage } from './pages/RecipePage';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Route path='/' element={<Layout/>}>
         <Route index element={<MainPage/>}/>
         <Route path='create' element={<CreateRecipePage/>}/>
+        <Route path='recipe/:id' element={<RecipePage/>}/>
       </Route>
     </Routes>
   );

@@ -1,0 +1,44 @@
+.cookingStage_info {
+   &:last-child {
+      margin-bottom: 15px;
+   }
+   margin-top: 10px;
+   .cookingStage_header {
+      display: flex;
+      align-items: center;
+      img {
+         height: 100%;
+         width: 40px;
+      }
+      p {
+         font-size: 1.1rem;
+         font-weight: bold;
+         margin-top: 3px;
+         margin-left: 7px;
+      }
+   }
+
+   .cookingStage_content {
+      margin-top: 15px;
+      .header {
+         p {
+            font-weight: bold;
+            font-size: 1.1rem;
+         }
+      }
+      .img_container {
+         max-width: 95%;
+         max-height: 400px;
+         img {
+            object-fit: cover;
+            margin-top: 10px;
+            width: 100%;
+            height: 100%;
+         }
+      }
+      p {
+         margin-top: 20px;
+         margin-left: 5px;
+      }
+   }
+}

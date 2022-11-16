@@ -1,20 +1,18 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { apiUrl } from "./apiSettings";
-import { IApiResponse, PaginationResponse, ServerResponse } from "./respose.model";
+import { BaseResponse, ErrorResponse, IApiResponse, PaginationResponse, ServerResponse } from "./respose.model";
 
 export async function getAsync<T>(url: string): Promise<IApiResponse<T>> {
    try {
       const queryUrl = `${apiUrl}/api/${url}`;
       const response = await axios.get<ServerResponse<T>>(queryUrl);
+      const data = response.data as BaseResponse<T>;
       return {
-         success: response.data.success,
-         data: response.data.data,
-         error: response.data.description,
-         code: response.status
-
+         success: data.success,
+         data: data.data,
       }
    } catch(e:any) {
-      const data = e?.response?.data;
+      const data = e?.response?.data as ErrorResponse;
       return {
          success : false,
          code: e?.response?.status,
@@ -35,18 +33,17 @@ export async function getPageAsync<T>(url: string): Promise<PaginationResponse<T
    }
 }
 
-export async function postAsync<T>(url: string, data: any): Promise<IApiResponse<T>> {
+export async function postAsync<T>(url: string, body: any): Promise<IApiResponse<T>> {
    try {
       const queryUrl = `${apiUrl}/api/${url}`;
-      const response = await axios.post<ServerResponse<T>>(queryUrl, data);
+      const response = await axios.post<ServerResponse<T>>(queryUrl, body);
+      const data = response.data as BaseResponse<T>;
       return {
-         data: response.data.data,
-         code: response.status,
-         error: response.data.description,
-         success: response.data.success
+         success: data.success,
+         data: data.data,
       }
-   } catch (e: any) {
-      const data = e?.response?.data;
+   } catch(e:any) {
+      const data = e?.response?.data as ErrorResponse;
       return {
          success : false,
          code: e?.response?.status,

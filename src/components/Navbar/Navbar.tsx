@@ -11,7 +11,7 @@ export const Navbar: React.FC = () => {
    return (
       <div className='nav'>
          <img 
-            src='mainlogo.png' 
+            src='/mainlogo.png' 
             style={{
                width: 110,
                height: 70,
@@ -24,7 +24,7 @@ export const Navbar: React.FC = () => {
 
          <div className='actions'>
             <div className='enter__button'>
-                  <img src='entericon.png' style={{
+                  <img src='/entericon.png' style={{
                      width: 40,
                      height: 40,
                      cursor: 'pointer'

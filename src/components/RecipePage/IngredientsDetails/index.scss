@@ -1,0 +1,37 @@
+.ingredients_info {
+   margin-top: 10px;
+   .ingredients_header {
+      display: flex;
+      align-items: center;
+      img {
+         height: 100%;
+         width: 40px;
+      }
+      p {
+         font-size: 1.1rem;
+         font-weight: bold;
+         margin-top: 3px;
+         margin-left: 7px;
+      }
+   }
+
+   .ingredient_content {
+      display: grid;
+      justify-content: start;
+      grid-template-columns: auto auto;
+      column-gap: 50px;
+      row-gap: 15px;
+      margin-left: 10px;
+      margin-top: 15px;
+      .ingredient_name {
+         grid-column: 1/2;
+      }
+      .ingredient_quantity {
+         grid-column: 2/3;
+      }
+
+      @media (max-width:426px) {
+         column-gap: 30px;
+      }
+   }
+}
