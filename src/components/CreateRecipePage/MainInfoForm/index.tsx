@@ -43,10 +43,14 @@ export const RecipeMainInfoForm: React.FC = () => {
          <Select 
             {...register('mealType', {required: true})}
          >
-            <option value={0}>завтрак</option>
-            <option value={1}>обед</option>
-            <option value={2}>полдник</option>
-            <option value={3}>ужин</option>
+            <option value={0}>салат</option>
+            <option value={1}>суп</option>
+            <option value={2}>мясные блюда</option>
+            <option value={3}>завтрак/перекус</option>
+            <option value={4}>гарниры</option>
+            <option value={5}>выпечка</option>
+            <option value={6}>десерт</option>
+            <option value={7}>соления</option>
          </Select>
       </FormControl>
       

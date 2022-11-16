@@ -11,9 +11,21 @@ interface IProps {
 export const MainInfoDetails: React.FC<IProps> = ({recipe, remark}) => {
    return (
       <div className="main_info">
-         <div className="main_header">
-            <img src='/recipeicon.png' className='recipe_logo'/>
-            <p>{recipe?.title}</p>
+         <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+         }}>
+            <div className="main_header">
+               <img src='/recipeicon.png' className='recipe_logo'/>
+               <p>{recipe?.title}</p>
+            </div>
+            <p style={{
+               fontWeight: 'bold',
+               fontSize: '1.1rem'
+            }}>
+               {recipe?.mealType}
+            </p>
          </div>
          <div style={{
             display: 'flex',

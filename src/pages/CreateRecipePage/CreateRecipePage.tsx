@@ -11,6 +11,7 @@ import { useAppSelector } from '../../core/hooks/useAppSelector';
 import { Loader } from '../../ui/Loader/Loader';
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from 'react-router';
 
 type FormValues = {
    title: string,
@@ -32,13 +33,14 @@ export const CreateRecipePage: React.FC = () => {
       mode: 'onBlur'
    })
    const dispath = useAppDispatch();
+   const navigate = useNavigate();
    const isLoading = useAppSelector(x => x.recipeCards.createCard.isLoading);
 
    const onSubmit = (data: FormValues) => {
       dispath(createRecipeCardThunk(data))
          .unwrap()
          .then(() =>{
-            methods.reset()
+            navigate('/');
          })
    }
    
