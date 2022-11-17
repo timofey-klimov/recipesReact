@@ -29,6 +29,11 @@ export const UploadedFilesErrorBlock: React.FC<IProps> = ({errors, imgDims}) => 
                      <VscError color='#FF4E14'/>
                      <span>{`Размеры должны быть меньше ${imgDims?.maxWidth}X${imgDims?.maxHeight}`}</span>
                   </div>
+               } else if (error.imageNotLoaded) {
+                  return <div className='file_error' key={index}>
+                     <VscError color='#FF4E14'/>
+                     <span>Неверный формат файла</span>
+                  </div>
                }
             })}
       </>
