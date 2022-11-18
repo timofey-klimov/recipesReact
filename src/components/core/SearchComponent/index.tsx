@@ -19,7 +19,7 @@ export const SearchComponent: React.FC<IProps> = () => {
    useEffect(() => {
       if (debounced && debounced.length >= 3) {
          console.log('get recipes');
-         getRecipesBySearchQueryAsync(value)
+         getRecipesBySearchQueryAsync(debounced)
             .then((response) => {
                if (response.success) {
                   setRecipes(response.data!);
