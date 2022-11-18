@@ -1,0 +1,7 @@
+.search_item {
+   padding: 10px 5px;
+   &:hover {
+      background-color: #E7E9E7;
+   }
+   cursor: pointer;
+}

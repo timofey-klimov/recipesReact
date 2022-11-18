@@ -2,10 +2,12 @@ import axios from "axios";
 import { apiUrl } from "./apiSettings";
 import { BaseResponse, ErrorResponse, IApiResponse, PaginationResponse, ServerResponse } from "./respose.model";
 
-export async function getAsync<T>(url: string): Promise<IApiResponse<T>> {
+export async function getAsync<T>(url: string, params?: {[key: string]: string | number}): Promise<IApiResponse<T>> {
    try {
       const queryUrl = `${apiUrl}/api/${url}`;
-      const response = await axios.get<ServerResponse<T>>(queryUrl);
+      const response = await axios.get<ServerResponse<T>>(queryUrl, {
+         params: params
+      });
       const data = response.data as BaseResponse<T>;
       return {
          success: data.success,

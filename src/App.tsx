@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Layout } from './components/Layout/Layout';
+import { Layout } from './components/core/Layout/Layout';
 import { CreateRecipePage } from './pages/CreateRecipePage/CreateRecipePage';
 import { MainPage } from './pages/MainPage/MainPage';
 import { RecipePage } from './pages/RecipePage';

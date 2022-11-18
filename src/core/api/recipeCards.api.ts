@@ -26,3 +26,7 @@ export async function createRecipeCardAsync(request: {
 export async function getRecipeDetailsAsync(id: number): Promise<IApiResponse<IRecipeDetails>> {
   return await getAsync(`recipe-cards/details/${id}`);
 }
+
+export async function getRecipesBySearchQueryAsync(value: string): Promise<IApiResponse<IRecipeCard[]>> {
+  return await getAsync(`recipe-cards/search`, { search: value })
+}

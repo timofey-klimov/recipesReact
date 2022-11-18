@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
-import { Search } from '../../ui/Search/Search';
+import { Search } from '../../../ui/Search/Search';
 import './Navbar.scss'
 import { FiPlus } from "react-icons/fi";
 import { NavLink, useNavigate } from 'react-router-dom';
+import { SearchComponent } from '../SearchComponent';
 
 export const Navbar: React.FC = () => {
    const enterButton = useRef<HTMLAnchorElement>(null);
@@ -20,7 +21,7 @@ export const Navbar: React.FC = () => {
             onClick={() => navigate('/')}
          />
          
-         <Search/>
+         <SearchComponent/>
 
          <div className='actions'>
             <div className='enter__button'>
