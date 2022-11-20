@@ -3,8 +3,8 @@ import { IRecipeDetails } from "../../models/recipes/recipeDetails.model";
 import { getAsync, getPageAsync, postAsync } from "./api.core";
 import { IApiResponse, PaginationResponse } from "./respose.model";
 
-export async function getRecipeCardsAsync(): Promise<PaginationResponse<IRecipeCard>> {
-  return await getPageAsync('recipe-cards/pages');
+export async function getRecipeCardsAsync(page: number): Promise<PaginationResponse<IRecipeCard>> {
+  return await getPageAsync('recipe-cards/pages', { pageNumber: page });
 }
 
 export async function createRecipeCardAsync(request: {

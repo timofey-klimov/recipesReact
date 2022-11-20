@@ -12,8 +12,7 @@ export type ServerResponse<T> = BaseResponse<T> | ErrorResponse;
 export interface PaginationResponse<T> {
    success: boolean;
    data: T[];
-   count?: number;
-   itemsPerPage?: number;
+   totalPages: number
 }
 
 export interface IApiResponse<T> {

@@ -5,10 +5,10 @@ import { IRecipeCard } from "../../../models/recipes/recipeCard.model";
 import {toast} from 'react-toastify';
 
 
-export const fetchRecipeCardsThunk = createAsyncThunk<PaginationResponse<IRecipeCard>, void, {rejectValue: string}>(
+export const fetchRecipeCardsThunk = createAsyncThunk<PaginationResponse<IRecipeCard>, number, {rejectValue: string}>(
    'recipeCards/fetch',
-   async function(_, { rejectWithValue}) {
-      const response = await getRecipeCardsAsync();
+   async function(page, { rejectWithValue}) {
+      const response = await getRecipeCardsAsync(page);
       if (!response.success) {
          toast.error('Произошла ошибка при получении рецептов');
          return rejectWithValue('Произошла ошибка при получении данных');

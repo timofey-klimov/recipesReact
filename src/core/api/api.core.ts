@@ -23,10 +23,12 @@ export async function getAsync<T>(url: string, params?: {[key: string]: string |
    }
 }
 
-export async function getPageAsync<T>(url: string): Promise<PaginationResponse<T>> {
+export async function getPageAsync<T>(url: string, params?: {[key: string]: string | number}): Promise<PaginationResponse<T>> {
    try {
       const queryUrl = `${apiUrl}/api/${url}`;
-      const response = await axios.get<PaginationResponse<T>>(queryUrl);
+      const response = await axios.get<PaginationResponse<T>>(queryUrl, {
+         params
+      });
       return response.data;
    } catch(e) {
       return {

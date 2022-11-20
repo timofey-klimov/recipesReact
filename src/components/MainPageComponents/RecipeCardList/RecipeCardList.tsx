@@ -1,26 +1,53 @@
-import React from 'react';
+import React, { createRef, useEffect, useRef } from 'react';
 import { IRecipeCard } from '../../../models/recipes/recipeCard.model';
 import { RecipeCard } from '../RecipeCard/RecipeCard';
 import './RecipeCardList.scss';
 
 interface IProps {
    cards?: IRecipeCard[],
-   onClick:(id: number) => void
+   onClick:(id: number) => void,
+   onIntersect: () => void
 }
 
-export const RecipeCardList: React.FC<IProps> = ({cards, onClick}) => {
+export const RecipeCardList: React.FC<IProps> = ({cards, onClick, onIntersect}) => {
+   const lastItem = createRef<HTMLDivElement>();
+   const observerLoader = useRef<IntersectionObserver>();
 
+   const interSectHandler = (entries:IntersectionObserverEntry[]) => {
+      if (entries?.[0]?.isIntersecting) {
+         onIntersect();
+      }
+   }
+
+   useEffect(() => {
+      if (observerLoader.current) {
+         observerLoader.current.disconnect();
+      }
+      observerLoader.current = new IntersectionObserver(interSectHandler);
+      if (lastItem.current) {
+         observerLoader.current.observe(lastItem.current);
+      }
+   }, [lastItem])
    return (
       <>
       <div className='recipe__cards'>
-         {cards?.map(recipe => (
-            <RecipeCard 
-               id={recipe.id!} 
-               title={recipe.title}
-               imageSource={recipe.imageSource}
-               key={recipe.id} 
-               onClick={onClick}/>
-         ))}
+         {cards?.map((recipe,index) => {
+            if (index + 1 === cards.length) {
+               return <RecipeCard 
+                        id={recipe.id!} 
+                        title={recipe.title}
+                        imageSource={recipe.imageSource}
+                        key={recipe.id} 
+                        onClick={onClick}
+                        ref={lastItem}/>
+            }
+            return <RecipeCard 
+                     id={recipe.id!} 
+                     title={recipe.title}
+                     imageSource={recipe.imageSource}
+                     key={recipe.id} 
+                     onClick={onClick}/>
+         })}
       </div>
       </>
    )

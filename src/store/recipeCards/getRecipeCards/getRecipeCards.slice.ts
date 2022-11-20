@@ -27,12 +27,29 @@ const recipeCardsSlice = createSlice({
             ...state,
             isLoading: true
          }))
-         .addCase(fetchRecipeCardsThunk.fulfilled, (state, action) => ({
-            ...state,
-            pageData: action.payload,
-            isLoading: false,
-            error: null
-         }))
+         .addCase(fetchRecipeCardsThunk.fulfilled, (state, action) => {
+            
+            if (state.pageData) {
+               const pageData = {
+                  ...state.pageData,
+                  data: [...state.pageData.data, ...action.payload.data]
+               } as PaginationResponse<IRecipeCard>;
+
+               return {
+                  ...state,
+                  pageData: pageData,
+                  isLoading: false,
+                  error: null
+               }
+               
+            }
+           return { 
+               ...state,
+               pageData: action.payload,
+               isLoading: false,
+               error: null
+           }
+         })
          .addCase(fetchRecipeCardsThunk.rejected, (state, action) => ({
             ...state,
             isLoading: false,

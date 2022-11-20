@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef, useRef } from 'react';
 import { apiUrl } from '../../../core/api/apiSettings';
 import './RecipeCard.scss';
 
@@ -9,9 +9,9 @@ interface IProps {
    onClick: (id:number) => void;
 }
 
-export const RecipeCard: React.FC<IProps> = (props: IProps) => {
+export const RecipeCard = forwardRef((props: IProps, ref: React.ForwardedRef<HTMLDivElement>) => {
    return (
-      <div className='recipe__card' onClick={() => props.onClick(props.id)}>
+      <div className='recipe__card' onClick={() => props.onClick(props.id)} ref={ref}>
          <img src={`${apiUrl}${props.imageSource}`} loading='lazy'/>
          <div className='recipe__footer'>
             <img src='recipeicon.png' className='recipe_logo'/>
@@ -19,4 +19,4 @@ export const RecipeCard: React.FC<IProps> = (props: IProps) => {
          </div>
       </div>
    )
-}
+})
