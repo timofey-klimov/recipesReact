@@ -6,10 +6,11 @@ import './RecipeCardList.scss';
 interface IProps {
    cards?: IRecipeCard[],
    onClick:(id: number) => void,
-   onIntersect: () => void
+   onIntersect: () => void,
+   onLastPage: () => boolean
 }
 
-export const RecipeCardList: React.FC<IProps> = ({cards, onClick, onIntersect}) => {
+export const RecipeCardList: React.FC<IProps> = ({cards, onClick, onIntersect, onLastPage}) => {
    const lastItem = createRef<HTMLDivElement>();
    const observerLoader = useRef<IntersectionObserver>();
 
@@ -20,6 +21,13 @@ export const RecipeCardList: React.FC<IProps> = ({cards, onClick, onIntersect}) 
    }
 
    useEffect(() => {
+      if (onLastPage()) {
+         if (observerLoader.current) {
+            observerLoader.current.disconnect();
+            return;
+         }
+      }
+
       if (observerLoader.current) {
          observerLoader.current.disconnect();
       }

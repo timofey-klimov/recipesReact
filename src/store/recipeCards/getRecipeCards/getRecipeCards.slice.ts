@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PaginationResponse } from "../../../core/api/respose.model";
 import { IRecipeCard } from "../../../models/recipes/recipeCard.model";
 import { fetchRecipeCardsThunk } from "./getRecipeCards.thunk";
@@ -6,26 +6,33 @@ import { fetchRecipeCardsThunk } from "./getRecipeCards.thunk";
 type RecipeCardsState = {
    pageData: PaginationResponse<IRecipeCard> | null,
    isLoading: boolean,
-   error: string | null
+   error: string | null,
+   page: number
 }
 
 const initialState: RecipeCardsState = {
    pageData: null,
    isLoading: false,
-   error: null
+   error: null,
+   page: 1
 }
 
 const recipeCardsSlice = createSlice({
    name: 'recipeCards/get',
    initialState,
    reducers: {
-
+      changePage(state, action: PayloadAction<number>) {
+         return {
+            ...state,
+            page: action.payload
+         }
+      }
    },
    extraReducers: (builder) => {
       builder
          .addCase(fetchRecipeCardsThunk.pending, (state) => ({
             ...state,
-            isLoading: true
+            isLoading: true,
          }))
          .addCase(fetchRecipeCardsThunk.fulfilled, (state, action) => {
             
@@ -59,3 +66,5 @@ const recipeCardsSlice = createSlice({
 })
 
 export default recipeCardsSlice.reducer;
+
+export const {changePage} = recipeCardsSlice.actions; 

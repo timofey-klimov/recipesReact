@@ -4,22 +4,22 @@ import { ToastContainer } from 'react-toastify';
 import { RecipeCardList } from '../../components/MainPageComponents/RecipeCardList/RecipeCardList';
 import { useAppDispatch } from '../../core/hooks/useAppDispatch';
 import { useAppSelector } from '../../core/hooks/useAppSelector';
+import { changePage } from '../../store/recipeCards/getRecipeCards/getRecipeCards.slice';
 import { fetchRecipeCardsThunk } from '../../store/recipeCards/getRecipeCards/getRecipeCards.thunk';
 import { Loader } from '../../ui/Loader/Loader';
 
 export const MainPage: React.FC = () => {
-   const dipatch = useAppDispatch();
+   const dispatch = useAppDispatch();
    const navigate = useNavigate();
-   const [page, setPage] = useState<number>(1);
-   console.log(page);
+   const page = useAppSelector(x => x.recipeCards.cards.page);
    const cards = useAppSelector(x => x.recipeCards.cards.pageData?.data);
    const loading = useAppSelector(x => x.recipeCards.cards.isLoading);
    const totalPage = useAppSelector(x => x.recipeCards.cards.pageData?.totalPages);
 
    useEffect(() => {
       console.log(page);
-      if (page == 1 || (totalPage && page - 1 < totalPage))
-         dipatch(fetchRecipeCardsThunk(page))
+      if (page == 1 || (totalPage && page < totalPage))
+         dispatch(fetchRecipeCardsThunk(page))
    }, [page])
 
    return (
@@ -29,9 +29,13 @@ export const MainPage: React.FC = () => {
             onClick={(id) => navigate(`/recipe/${id}`)}
             onIntersect={() =>  {
                if (totalPage && page < totalPage) {
-                  setPage((prev) => prev + 1)
-               }
+                  if (page + 1 == totalPage) {
+                     dispatch(fetchRecipeCardsThunk(page + 1))
+                  }
+                  dispatch(changePage(page + 1))
+               } 
             }}
+            onLastPage={() => totalPage == page}
             />
          <ToastContainer autoClose={2000}/>
          <Loader loading={loading} fullScreen/>
