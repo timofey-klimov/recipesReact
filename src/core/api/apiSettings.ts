@@ -1,1 +1,1 @@
-export const apiUrl: any = process.env.NODE_ENV == 'development' ? 'http://localhost:5000' : '';
+export const apiUrl: any = 'http://vm-066d97fc.na4u.ru';
