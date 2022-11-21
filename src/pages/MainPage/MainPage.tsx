@@ -18,7 +18,7 @@ export const MainPage: React.FC = () => {
 
    useEffect(() => {
       console.log(page);
-      if (page == 1 || (totalPage && page < totalPage))
+      if ((page == 1 && totalPage != 1) || (totalPage && page < totalPage))
          dispatch(fetchRecipeCardsThunk(page))
    }, [page])
 

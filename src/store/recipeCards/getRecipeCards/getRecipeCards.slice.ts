@@ -39,7 +39,8 @@ const recipeCardsSlice = createSlice({
             if (state.pageData) {
                const pageData = {
                   ...state.pageData,
-                  data: [...state.pageData.data, ...action.payload.data]
+                  data: [...state.pageData.data, ...action.payload.data],
+                  totalPages: action.payload.totalPages
                } as PaginationResponse<IRecipeCard>;
 
                return {
