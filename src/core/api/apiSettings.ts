@@ -1,1 +1,1 @@
-export const apiUrl: any = 'http://vm-066d97fc.na4u.ru';
+export const apiUrl: any = 'https://nika-cook.ru';

@@ -14,7 +14,7 @@ export const Navbar: React.FC = () => {
          <img 
             src='/mainlogo.png' 
             style={{
-               width: 110,
+               width: 100,
                height: 70,
                cursor: 'pointer'
             }}

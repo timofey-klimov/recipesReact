@@ -5,6 +5,7 @@ import './FilePicker.scss'
 import { UploadedFilesErrorBlock } from './components/UploadedFilesErrorBlock/UploadedFilesErrorBlock';
 import { UploadedFilesBlock } from './components/UploadedFilesBlock/UploadedFilesBlock';
 import { useController } from 'react-hook-form';
+import { clearArray } from '../../utils/utils';
 
 
 interface IProps {
@@ -42,19 +43,22 @@ export const FilePicker: React.FC<IProps> = ({imgDims, name, validationOpts}) =>
    useEffect(() => {
       if(!dragFile) return;
       if ((validTypes().includes(dragFile?.type))) {
+         clearArray(errors);
          readFileAsync(dragFile)
             .then((content) => {
-               imageRef!.current!.src = content;
-               const width = imageRef.current?.naturalWidth;
-               const height = imageRef.current?.naturalHeight;
-               const imgError = checkImgDims(width!, height!);
-               if (imgError) {
-                  errors.push(imgError);
-               } else {
-                  filesContent.push({name: dragFile.name!, lastModified: dragFile.lastModified!, content})
-                  plainFiles.push(dragFile);
-               }
-               setIsDrag(false);
+               loadImageAsync(imageRef!.current!, content)
+                  .then(() => {
+                     const width = imageRef.current?.naturalWidth;
+                     const height = imageRef.current?.naturalHeight;
+                     const imgErroror = checkImgDims(width!, height!);
+                     if (imgErroror) {
+                        errors.push(imgErroror);
+                     } else {
+                        filesContent.push({name: dragFile.name!, lastModified: dragFile.lastModified!, content})
+                        plainFiles.push(dragFile);
+                     }
+                     setIsDrag(false);
+                  })
             })
       } else {
          errors.push({imageNotLoaded: true})
@@ -87,20 +91,35 @@ export const FilePicker: React.FC<IProps> = ({imgDims, name, validationOpts}) =>
       })
    }
 
+   const loadImageAsync = (image: HTMLImageElement, content: string): Promise<void> => {
+      return new Promise((resolve) => {
+         image.src = content;
+         image.onload = () => {
+            resolve();
+         }
+      })
+   }
+
    const checkImgDims = (width: number, height: number): FileError | undefined => {
       const errors = [];
+      if (imgDims?.minWidth && width < imgDims.minWidth) {
          errors.push(
-            { imageWidthTooSmall: (imgDims?.minWidth && width < imgDims.minWidth)} as FileError)
-
+            { imageWidthTooSmall: true} as FileError)
+      }
+      if (imgDims?.minHeight && height < imgDims.minHeight) {
          errors.push(
-            { imageHeightTooSmall: imgDims?.minHeight && height < imgDims.minHeight} as FileError)
-
+            { imageHeightTooSmall: true} as FileError)
+      }
+      if (imgDims?.maxWidth && width > imgDims.maxWidth) {
          errors.push(
-            { imageWidthTooBig: imgDims?.maxWidth && width > imgDims.maxWidth } as FileError)
-
+            { imageWidthTooBig: true } as FileError)
+      }
+      if (imgDims?.maxHeight && height > imgDims.maxHeight) {
          errors.push(
-            { imageHeightTooBig: imgDims?.maxHeight && height > imgDims.maxHeight} as FileError
+            { imageHeightTooBig: true} as FileError
          )
+      }
+
       return errors?.[0];
    }
 
