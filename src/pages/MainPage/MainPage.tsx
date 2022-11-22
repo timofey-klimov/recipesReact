@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { ToastContainer } from 'react-toastify';
 import { RecipeCardList } from '../../components/MainPageComponents/RecipeCardList/RecipeCardList';
 import { useAppDispatch } from '../../core/hooks/useAppDispatch';
 import { useAppSelector } from '../../core/hooks/useAppSelector';
 import { changePage } from '../../store/recipeCards/getRecipeCards/getRecipeCards.slice';
-import { fetchRecipeCardsThunk } from '../../store/recipeCards/getRecipeCards/getRecipeCards.thunk';
+import { fetchRecipeCardsThunk, initFetchRecipeCardsThunk } from '../../store/recipeCards/getRecipeCards/getRecipeCards.thunk';
 import { Loader } from '../../ui/Loader/Loader';
 
 export const MainPage: React.FC = () => {
@@ -17,8 +16,11 @@ export const MainPage: React.FC = () => {
    const totalPage = useAppSelector(x => x.recipeCards.cards.pageData?.totalPages);
 
    useEffect(() => {
-      console.log(page);
-      if ((page == 1 && totalPage != 1) || (totalPage && page < totalPage))
+      dispatch(initFetchRecipeCardsThunk())
+   }, [])
+
+   useEffect(() => {
+      if (page != 1 && (totalPage && page < totalPage))
          dispatch(fetchRecipeCardsThunk(page))
    }, [page])
 
@@ -37,7 +39,6 @@ export const MainPage: React.FC = () => {
             }}
             onLastPage={() => totalPage == page}
             />
-         <ToastContainer autoClose={2000}/>
          <Loader loading={loading} fullScreen/>
       </>
    )

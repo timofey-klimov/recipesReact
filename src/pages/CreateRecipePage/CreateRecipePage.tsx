@@ -9,7 +9,6 @@ import { useAppDispatch } from '../../core/hooks/useAppDispatch';
 import { createRecipeCardThunk } from '../../store/recipeCards/createRecipe/createRecipeCard.thunk';
 import { useAppSelector } from '../../core/hooks/useAppSelector';
 import { Loader } from '../../ui/Loader/Loader';
-import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from 'react-router';
 
@@ -65,7 +64,6 @@ export const CreateRecipePage: React.FC = () => {
          </div>
       </div>
       <Loader loading={isLoading} fullScreen/>
-      <ToastContainer autoClose={2000}/>
       </>
    )
 }

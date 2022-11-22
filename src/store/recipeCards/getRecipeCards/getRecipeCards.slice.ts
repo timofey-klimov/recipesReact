@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PaginationResponse } from "../../../core/api/respose.model";
 import { IRecipeCard } from "../../../models/recipes/recipeCard.model";
-import { fetchRecipeCardsThunk } from "./getRecipeCards.thunk";
+import { fetchRecipeCardsThunk, initFetchRecipeCardsThunk } from "./getRecipeCards.thunk";
 
 type RecipeCardsState = {
    pageData: PaginationResponse<IRecipeCard> | null,
@@ -62,6 +62,26 @@ const recipeCardsSlice = createSlice({
             ...state,
             isLoading: false,
             error: action.payload!
+         }))
+         .addCase(initFetchRecipeCardsThunk.pending, (state, action) => ({
+            ...state,
+            isLoading: true,
+            error: null,
+            pageData: null,
+            page: 1
+         }))
+         .addCase(initFetchRecipeCardsThunk.fulfilled, (state, action) => ({
+            ...state,
+            isLoading: false,
+            error: null,
+            page: 1,
+            pageData: action.payload
+         }))
+         .addCase(initFetchRecipeCardsThunk.rejected, (state, action) => ({
+            ...state,
+            isLoading: false,
+            error: action.payload!,
+            pageData: null
          }))
    }
 })

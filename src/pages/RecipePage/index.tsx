@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
-import { ToastContainer } from 'react-toastify';
 import { CookingStagesDetails } from '../../components/RecipePage/CookingStagesDetails';
 import { IngredientsDetails } from '../../components/RecipePage/IngredientsDetails';
 import { MainInfoDetails } from '../../components/RecipePage/MainInfoDetails';
@@ -33,7 +32,6 @@ export const RecipePage: React.FC = () => {
                         <CookingStagesDetails stages={details?.stages!}/>
                      </div>
                   </div> }
-      <ToastContainer autoClose={2000}/>
       </>
    )
 }

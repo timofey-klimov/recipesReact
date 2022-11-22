@@ -16,3 +16,16 @@ export const fetchRecipeCardsThunk = createAsyncThunk<PaginationResponse<IRecipe
       return response
    }
 )
+
+export const initFetchRecipeCardsThunk = createAsyncThunk<PaginationResponse<IRecipeCard>, void, {rejectValue: string}>(
+   'recipeCards/init',
+   async function(_, {rejectWithValue}) {
+      const response = await getRecipeCardsAsync(1);
+      if (!response.success) {
+         toast.error('Произошла ошибка при получении рецептов');
+         return rejectWithValue('Произошла ошибка при получении рецептов')
+      }
+
+      return response;
+   }
+)
