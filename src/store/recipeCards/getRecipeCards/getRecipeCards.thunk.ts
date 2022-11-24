@@ -5,22 +5,23 @@ import { IRecipeCard } from "../../../models/recipes/recipeCard.model";
 import {toast} from 'react-toastify';
 
 
-export const fetchRecipeCardsThunk = createAsyncThunk<PaginationResponse<IRecipeCard>, number, {rejectValue: string}>(
-   'recipeCards/fetch',
-   async function(page, { rejectWithValue}) {
-      const response = await getRecipeCardsAsync(page);
-      if (!response.success) {
-         toast.error('Произошла ошибка при получении рецептов');
-         return rejectWithValue('Произошла ошибка при получении данных');
-      }
-      return response
+export const fetchRecipeCardsThunk = 
+   createAsyncThunk<PaginationResponse<IRecipeCard>, {page: number, search: string | null}, {rejectValue: string}>(
+      'recipeCards/fetch',
+      async function(data, { rejectWithValue}) {
+         const response = await getRecipeCardsAsync(data.page, data.search);
+         if (!response.success) {
+            toast.error('Произошла ошибка при получении рецептов');
+            return rejectWithValue('Произошла ошибка при получении данных');
+         }
+         return response
    }
 )
 
-export const initFetchRecipeCardsThunk = createAsyncThunk<PaginationResponse<IRecipeCard>, void, {rejectValue: string}>(
+export const initFetchRecipeCardsThunk = createAsyncThunk<PaginationResponse<IRecipeCard>, string | null, {rejectValue: string}>(
    'recipeCards/init',
-   async function(_, {rejectWithValue}) {
-      const response = await getRecipeCardsAsync(1);
+   async function(search, {rejectWithValue}) {
+      const response = await getRecipeCardsAsync(1, search);
       if (!response.success) {
          toast.error('Произошла ошибка при получении рецептов');
          return rejectWithValue('Произошла ошибка при получении рецептов')

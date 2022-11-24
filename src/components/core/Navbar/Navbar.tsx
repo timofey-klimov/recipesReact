@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
-import { Search } from '../../../ui/Search/Search';
-import './Navbar.scss'
+import './Navbar.scss';
 import { FiPlus } from "react-icons/fi";
 import { NavLink, useNavigate } from 'react-router-dom';
 import { SearchComponent } from '../SearchComponent';
@@ -11,19 +10,17 @@ export const Navbar: React.FC = () => {
    const navigate = useNavigate();
    return (
       <div className='nav'>
-         <img 
-            src='/mainlogo.png' 
-            style={{
-               width: 100,
-               height: 70,
-               cursor: 'pointer'
-            }}
-            onClick={() => navigate('/')}
-         />
+         <div className='logo_wrapper'>
+            <img 
+               src='/mainlogo.png' 
+               onClick={() => navigate('/')}
+               className='logo_nav'
+            />
+         </div>
          
-         <SearchComponent/>
+         <SearchComponent className='search_nav'/>
 
-         <div className='actions'>
+         <div className='actions_nav'>
             <div className='enter__button'>
                   <img src='/entericon.png' style={{
                      width: 40,

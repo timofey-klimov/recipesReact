@@ -10,18 +10,21 @@ import { Loader } from '../../ui/Loader/Loader';
 export const MainPage: React.FC = () => {
    const dispatch = useAppDispatch();
    const navigate = useNavigate();
+   const search = useAppSelector(x => x.search.searchValue);
    const page = useAppSelector(x => x.recipeCards.cards.page);
    const cards = useAppSelector(x => x.recipeCards.cards.pageData?.data);
    const loading = useAppSelector(x => x.recipeCards.cards.isLoading);
    const totalPage = useAppSelector(x => x.recipeCards.cards.pageData?.totalPages);
 
    useEffect(() => {
-      dispatch(initFetchRecipeCardsThunk())
-   }, [])
+      console.log('init recipes');
+      dispatch(initFetchRecipeCardsThunk(search))
+   }, [search])
 
    useEffect(() => {
+      console.log("page changes");
       if (page != 1 && (totalPage && page < totalPage))
-         dispatch(fetchRecipeCardsThunk(page))
+         dispatch(fetchRecipeCardsThunk({page, search}))
    }, [page])
 
    return (
@@ -32,7 +35,7 @@ export const MainPage: React.FC = () => {
             onIntersect={() =>  {
                if (totalPage && page < totalPage) {
                   if (page + 1 == totalPage) {
-                     dispatch(fetchRecipeCardsThunk(page + 1))
+                     dispatch(fetchRecipeCardsThunk({page: page + 1, search}))
                   }
                   dispatch(changePage(page + 1))
                } 

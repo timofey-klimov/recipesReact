@@ -6,22 +6,34 @@
    height: 5rem;
    box-shadow: 4px 0px 4px 0px rgba(0, 0, 0, .25);
    background-color: #FFF;
-   display: flex;
-   justify-content: space-around;
+   display: grid;
+   grid-template-columns: 1fr 1.5fr 1fr;
    align-items: center;
    padding: 0 30px;
    z-index: 9999;
 
-   .actions {
+   
+   .actions_nav {
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
    }
+   
+   .logo_wrapper {
+      display: flex;
+      justify-content: center;
 
+      .logo_nav {
+         width: 100px;
+         height: 70px;
+         cursor: 'pointer';
+      }
+   }
+   
    .enter__button{
       display: flex;
       flex-direction: column;
       align-items: center;
-
+      
       a {
          border: none;
          background-color: inherit;
@@ -30,22 +42,22 @@
          text-decoration: none;
          font-size: 14px;
       }
-
+      
       img {
          transition: all ease-in 200ms;
       }
-
+      
       &:hover img {
          transform: scale(1.1);
       }
    }
-
+   
    .create__button {
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-left: 15px;
-
+      
       a {
          border: none;
          background-color: inherit;
@@ -54,13 +66,39 @@
          text-decoration: none;
          font-size: 14px;
       }
-
+      
       svg {
          transition: all ease-in 200ms;
       }
-
+      
       &:hover svg {
          transform: scale(1.1);
+      }
+   }
+   @media(max-width:426px) {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      height: 8rem;
+      .logo_wrapper {
+         justify-content: start;
+         .logo_nav {
+            width: 90px;
+            height: 60px;
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+         }
+      }
+
+      .actions_nav {
+         justify-content: end;
+      }
+      .search_nav {
+         grid-column: 1 / 3;
+         grid-row: 2 / 3;
+      }
+      .actions_nav {
+         grid-column: 2 / 3;
+         grid-row: 1 / 2;
       }
    }
 }

@@ -6,10 +6,11 @@ import './index.scss';
 
 interface IProps {
    recipes: IRecipeCard[] | undefined;
-   onClick: () => void; 
+   onClick: () => void;
+   shouldShow: boolean 
 }
 
-export const SearchItems: React.FC<IProps> = ({recipes, onClick}) => {
+export const SearchItems: React.FC<IProps> = ({recipes, onClick, shouldShow}) => {
    const navigate = useNavigate();
 
    const handleClick = (id: number) => {
@@ -20,7 +21,7 @@ export const SearchItems: React.FC<IProps> = ({recipes, onClick}) => {
    return (
       <div className='search_items'>
          {
-            recipes && 
+            recipes && shouldShow &&
             <ul>
                {
                   recipes.map((recipe,index) => {

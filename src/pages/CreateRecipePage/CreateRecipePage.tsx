@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './CreateRecipePage.scss';
 import { FormProvider, useForm } from 'react-hook-form';
 import { RecipeMainInfoForm } from '../../components/CreateRecipePage/MainInfoForm';
@@ -11,6 +11,7 @@ import { useAppSelector } from '../../core/hooks/useAppSelector';
 import { Loader } from '../../ui/Loader/Loader';
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from 'react-router';
+import { clearSearch } from '../../store/search/search.slice';
 
 type FormValues = {
    title: string,
@@ -43,6 +44,10 @@ export const CreateRecipePage: React.FC = () => {
          })
    }
    
+   useEffect(() => {
+      dispath(clearSearch())
+   },[])
+
    return (
       <>
       <div className='create_form_wrapper'>

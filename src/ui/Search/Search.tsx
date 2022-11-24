@@ -4,7 +4,8 @@ import { IoSearch } from "react-icons/io5";
 
 interface IProps {
    onChange?: (value: string) => void;
-   value?: string
+   value?: string;
+   onClick?: (search: string) => void;
 }
 
 export const Search: React.FC<IProps> = (props) => {
@@ -13,6 +14,12 @@ export const Search: React.FC<IProps> = (props) => {
    const onChangeHandle = (e:React.ChangeEvent<HTMLInputElement>) => {
       if (props.onChange) {
          props.onChange(e.target.value);
+      }
+   }
+
+   const onClickHandler = () => {
+      if (props.onClick) {
+         props.onClick(ref.current?.value ?? '')
       }
    }
 
@@ -27,7 +34,7 @@ export const Search: React.FC<IProps> = (props) => {
             onChange={onChangeHandle}
             value={props.value}
          />
-         <div>
+         <div onClick={onClickHandler}>
             <IoSearch color='#FFF'/>
          </div>
       </div>
