@@ -12,6 +12,8 @@ import { Loader } from '../../ui/Loader/Loader';
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from 'react-router';
 import { clearSearch } from '../../store/search/search.slice';
+import { useEventBus } from '../../core/hooks/useEventBus';
+import { ComponentEvents } from '../../core/eventBus/events';
 
 type FormValues = {
    title: string,
@@ -34,6 +36,7 @@ export const CreateRecipePage: React.FC = () => {
    })
    const dispath = useAppDispatch();
    const navigate = useNavigate();
+   const {  dispatch } = useEventBus();
    const isLoading = useAppSelector(x => x.recipeCards.createCard.isLoading);
 
    const onSubmit = (data: FormValues) => {
@@ -45,7 +48,7 @@ export const CreateRecipePage: React.FC = () => {
    }
    
    useEffect(() => {
-      dispath(clearSearch())
+      dispatch(ComponentEvents.ClearSearchEvent)
    },[])
 
    return (

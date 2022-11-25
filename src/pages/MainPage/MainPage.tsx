@@ -17,12 +17,10 @@ export const MainPage: React.FC = () => {
    const totalPage = useAppSelector(x => x.recipeCards.cards.pageData?.totalPages);
 
    useEffect(() => {
-      console.log('init recipes');
       dispatch(initFetchRecipeCardsThunk(search))
    }, [search])
 
    useEffect(() => {
-      console.log("page changes");
       if (page != 1 && (totalPage && page < totalPage))
          dispatch(fetchRecipeCardsThunk({page, search}))
    }, [page])

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { getRecipesBySearchQueryAsync } from '../../../core/api/recipeCards.api';
+import { ComponentEvents } from '../../../core/eventBus/events';
 import { useAppDispatch } from '../../../core/hooks/useAppDispatch';
 import { useAppSelector } from '../../../core/hooks/useAppSelector';
 import { useDebounce } from '../../../core/hooks/useDebounce';
+import { useEventBus } from '../../../core/hooks/useEventBus';
 import { useInput } from '../../../core/hooks/useInput';
 import { IRecipeCard } from '../../../models/recipes/recipeCard.model';
 import { clearSearch, searchUpdate } from '../../../store/search/search.slice';
@@ -19,10 +21,14 @@ export const SearchComponent: React.FC<IProps> = ({className}) => {
    const debounced = useDebounce(value);
    const [searchRecipes, setSearchRecipes] = useState<IRecipeCard[]>();
    const [showSearchResult, setShowSearchResult] = useState(true);
-   const search = useAppSelector(x => x.search.searchValue);
+   const { on } = useEventBus();
    const dispatch = useAppDispatch();
    const navigate = useNavigate();
    
+   useEffect(() => {
+      on(ComponentEvents.ClearSearchEvent, () => clear())
+   }, [])
+
    useEffect(() => {
       if (debounced && debounced.length >= 3) {
          getRecipesSearchData();

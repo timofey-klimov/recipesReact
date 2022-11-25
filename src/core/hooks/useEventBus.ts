@@ -12,12 +12,12 @@ export const useEventBus = () => {
       }
    }, [])
 
-   const onHandler = (event: string, handler: (data: any) => void) => {
+   const onHandler = (event: string, handler: (data?: any) => void) => {
       setEvents([...events, {eventType: event, handler}])
       document.addEventListener(event, handler)
    }
 
-   const dispatchHandler = (event: string, data: any) => {
+   const dispatchHandler = (event: string, data?: any) => {
       document.dispatchEvent(new CustomEvent(event, {detail: data}))
    }
 
