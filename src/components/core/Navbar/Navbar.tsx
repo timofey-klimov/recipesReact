@@ -1,13 +1,16 @@
 import React, { useRef } from 'react';
 import './Navbar.scss';
-import { FiPlus } from "react-icons/fi";
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { SearchComponent } from '../SearchComponent';
+import { authService } from '../../../core/services/authService';
+import { CreateNavButton } from './components/CreateButton';
+import { AuthNavButton } from './components/AuthButton';
+import { MenuNavButton } from './components/MenuButton';
 
 export const Navbar: React.FC = () => {
-   const enterButton = useRef<HTMLAnchorElement>(null);
-   const createButton = useRef<HTMLAnchorElement>(null);
    const navigate = useNavigate();
+   const { isAuth } = authService();
+
    return (
       <div className='nav'>
          <div className='logo_wrapper'>
@@ -21,24 +24,13 @@ export const Navbar: React.FC = () => {
          <SearchComponent className='search_nav'/>
 
          <div className='actions_nav'>
-            <div className='enter__button'>
-                  <img src='/entericon.png' style={{
-                     width: 40,
-                     height: 40,
-                     cursor: 'pointer'
-                  }} onClick={() => enterButton.current?.click()}/>
-               <NavLink to={''} ref={enterButton}>Войти</NavLink>
-            </div>
+            {
+               !isAuth ?
+               <AuthNavButton path={'/auth'}/>
+               : <MenuNavButton/>
+            }
             
-            <div className='create__button'>
-                  <FiPlus style={{
-                     width: 40,
-                     height: 40,
-                     cursor: 'pointer',
-                  }} onClick={() => createButton?.current?.click()}/>
-                  
-               <NavLink to={'/create'} ref={createButton}>Создать</NavLink>
-            </div>
+           <CreateNavButton path={'/create'}/>
          </div>
       </div>
    )

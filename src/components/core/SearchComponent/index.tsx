@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router';
 import { getRecipesBySearchQueryAsync } from '../../../core/api/recipeCards.api';
 import { ComponentEvents } from '../../../core/eventBus/events';
 import { useAppDispatch } from '../../../core/hooks/useAppDispatch';
-import { useAppSelector } from '../../../core/hooks/useAppSelector';
 import { useDebounce } from '../../../core/hooks/useDebounce';
 import { useEventBus } from '../../../core/hooks/useEventBus';
 import { useInput } from '../../../core/hooks/useInput';

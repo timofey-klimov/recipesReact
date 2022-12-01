@@ -3,7 +3,7 @@ import { IRecipeDetails } from "../../models/recipes/recipeDetails.model";
 import { getAsync, getPageAsync, postAsync } from "./api.core";
 import { IApiResponse, PaginationResponse } from "./respose.model";
 
-export async function  getRecipeCardsAsync(page: number, search: string | null): Promise<PaginationResponse<IRecipeCard>> {
+export async function getRecipeCardsAsync(page: number, search: string | null): Promise<PaginationResponse<IRecipeCard>> {
   const baseParams = {pageNumber: page}
   const params = search == null 
     ? baseParams

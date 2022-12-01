@@ -1,0 +1,17 @@
+.auth_tab_header {
+   margin: 0 10px;
+   padding: 0 10px;
+   border: none;
+   border-bottom: 2px solid rgba(229,231,235, 1);
+   font-size: 1.3rem;
+   transition: all ease-in .2ms;
+   
+   &.selected {
+      color: rgba(13,148,136);
+      border-bottom: 2px solid rgba(13,148,136);;
+   }
+
+   &:focus-visible {
+      outline: none;
+   }
+}

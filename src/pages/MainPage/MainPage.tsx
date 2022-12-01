@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { RecipeCardList } from '../../components/MainPageComponents/RecipeCardList/RecipeCardList';
+import { RecipeCardList } from '../../components/pages/MainPageComponents/RecipeCardList/RecipeCardList';
 import { useAppDispatch } from '../../core/hooks/useAppDispatch';
 import { useAppSelector } from '../../core/hooks/useAppSelector';
 import { changePage } from '../../store/recipeCards/getRecipeCards/getRecipeCards.slice';

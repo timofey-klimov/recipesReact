@@ -1,0 +1,22 @@
+.enter__button{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   
+   a {
+      border: none;
+      background-color: inherit;
+      cursor: pointer;
+      color: #000;
+      text-decoration: none;
+      font-size: 14px;
+   }
+   
+   img {
+      transition: all ease-in 200ms;
+   }
+   
+   &:hover img {
+      transform: scale(1.1);
+   }
+}

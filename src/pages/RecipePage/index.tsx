@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
-import { CookingStagesDetails } from '../../components/RecipePage/CookingStagesDetails';
-import { IngredientsDetails } from '../../components/RecipePage/IngredientsDetails';
-import { MainInfoDetails } from '../../components/RecipePage/MainInfoDetails';
+import { CookingStagesDetails } from '../../components/pages/RecipePage/CookingStagesDetails';
+import { IngredientsDetails } from '../../components/pages/RecipePage/IngredientsDetails';
+import { MainInfoDetails } from '../../components/pages/RecipePage/MainInfoDetails';
 import { useAppDispatch } from '../../core/hooks/useAppDispatch';
 import { useAppSelector } from '../../core/hooks/useAppSelector';
 import { getRecipeDetailsThunk } from '../../store/recipeCards/recipeDetails/recipeDetails.thunk';

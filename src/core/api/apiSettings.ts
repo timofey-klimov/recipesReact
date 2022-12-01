@@ -1,1 +1,1 @@
-export const apiUrl: any = 'https://nika-cook.ru';
+export const apiUrl: any = 'http://localhost:5000';

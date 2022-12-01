@@ -1,12 +1,20 @@
 import axios from "axios";
+import { authService } from "../services/authService";
 import { apiUrl } from "./apiSettings";
 import { BaseResponse, ErrorResponse, IApiResponse, PaginationResponse, ServerResponse } from "./respose.model";
 
+const authHeaders = function() {
+   const { token, isAuth } = authService();
+   return isAuth ? { Authorization: `Bearer ${token}`} : {}
+}
+
 export async function getAsync<T>(url: string, params?: {[key: string]: string | number}): Promise<IApiResponse<T>> {
+   const { token, isAuth } = authService();
    try {
       const queryUrl = `${apiUrl}/api/${url}`;
       const response = await axios.get<ServerResponse<T>>(queryUrl, {
-         params: params
+         params: params,
+         headers: authHeaders()
       });
       const data = response.data as BaseResponse<T>;
       return {
@@ -27,7 +35,8 @@ export async function getPageAsync<T>(url: string, params?: {[key: string]: stri
    try {
       const queryUrl = `${apiUrl}/api/${url}`;
       const response = await axios.get<PaginationResponse<T>>(queryUrl, {
-         params
+         params,
+         headers: authHeaders()
       });
       return response.data;
    } catch(e) {
@@ -40,7 +49,9 @@ export async function getPageAsync<T>(url: string, params?: {[key: string]: stri
 export async function postAsync<T>(url: string, body: any): Promise<IApiResponse<T>> {
    try {
       const queryUrl = `${apiUrl}/api/${url}`;
-      const response = await axios.post<ServerResponse<T>>(queryUrl, body);
+      const response = await axios.post<ServerResponse<T>>(queryUrl, body, {
+         headers: authHeaders()
+      });
       const data = response.data as BaseResponse<T>;
       return {
          success: data.success,

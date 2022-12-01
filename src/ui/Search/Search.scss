@@ -24,11 +24,11 @@
       width: 52px;
       height: 52px;
       z-index: 1;
-      background-color: #8FB98F;
-      border-radius: 10px;
+      background-color: rgba(13,148,136,.8);
+      border-radius: 0 10px 10px 0;
       cursor: pointer;
       &:hover {
-         background-color: #749a74;
+         background-color: rgba(13,148,136);
          -webkit-transition: background-color 100ms linear;
          -ms-transition: background-color 100ms linear;
          transition: background-color 100ms linear;

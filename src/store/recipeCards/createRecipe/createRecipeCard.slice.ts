@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ICreateRecipeRequest } from "../../../models/recipes/createRecipe.model";
 import { createRecipeCardThunk } from "./createRecipeCard.thunk";
 
 type CreateRecipeCardState = {

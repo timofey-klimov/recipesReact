@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import './CreateRecipePage.scss';
 import { FormProvider, useForm } from 'react-hook-form';
-import { RecipeMainInfoForm } from '../../components/CreateRecipePage/MainInfoForm';
-import { IngredientsForm } from '../../components/CreateRecipePage/IngredientsForm/IngredientsForm';
-import { CookingStageForm } from '../../components/CreateRecipePage/CookingStageForm';
+import { RecipeMainInfoForm } from '../../components/pages/CreateRecipePage/MainInfoForm';
+import { IngredientsForm } from '../../components/pages/CreateRecipePage/IngredientsForm/IngredientsForm';
+import { CookingStageForm } from '../../components/pages/CreateRecipePage/CookingStageForm';
 import { PrimaryButton } from '../../ui/PrimaryButton/PrimaryButton';
 import { useAppDispatch } from '../../core/hooks/useAppDispatch';
 import { createRecipeCardThunk } from '../../store/recipeCards/createRecipe/createRecipeCard.thunk';
