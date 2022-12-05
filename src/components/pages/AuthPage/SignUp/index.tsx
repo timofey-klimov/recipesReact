@@ -1,6 +1,6 @@
-import { FormControl, FormErrorMessage, FormLabel, Input, RequiredIndicator } from '@vechaiui/react';
+import { Button, FormControl, FormErrorMessage, FormLabel, Input, RequiredIndicator } from '@vechaiui/react';
 import React, { useState } from 'react';
-import { FieldError, FieldValue, useForm } from 'react-hook-form';
+import { FieldError, useForm } from 'react-hook-form';
 import { PrimaryButton } from '../../../../ui/PrimaryButton/PrimaryButton';
 import { validateEmailSignUpAsync, validateLoginSignUpAsync } from '../validation';
 import { IoIosCloseCircle } from 'react-icons/io';
@@ -14,9 +14,10 @@ interface SignUpValues {
 
 interface IProps {
    submit: (data: SignUpValues) => void;
+   isLoading: boolean
 }
 
-export const SignUp: React.FC<IProps> = ({submit}) => {
+export const SignUp: React.FC<IProps> = ({ submit, isLoading }) => {
 
    const { register, formState: { errors }, handleSubmit } = useForm<SignUpValues>({
       mode: 'onBlur'
@@ -24,6 +25,9 @@ export const SignUp: React.FC<IProps> = ({submit}) => {
 
    const [loginValidate, setLoginValidate] = useState(false);
    const [emailValidate, setEmailValidate] = useState(false);
+   const [showPassword, setShowPassword] = useState(false);
+
+   const handleShowPassword = () => setShowPassword(!showPassword);
 
    const errorsForLogin = () => {
       if (errors?.login?.type === 'required') {
@@ -158,13 +162,30 @@ export const SignUp: React.FC<IProps> = ({submit}) => {
             <FormLabel>
                Пароль<RequiredIndicator/>
             </FormLabel>
-            <Input   
-               placeholder='Введите пароль'
-               {...register('password', {
-                  required: true,
-                  minLength: 6
-               })}
-            />
+            <Input.Group>
+               <Input   
+                  placeholder='Введите пароль'
+                  {...register('password', {
+                     required: true,
+                     minLength: 6
+                  })}
+                  type={showPassword ? 'text' : 'password'}
+               />
+               <Input.RightElement className="w-16">
+                  <Button 
+                     type='button' 
+                     size='xs'
+                     variant='solid' 
+                     onClick={handleShowPassword}
+                     style={{
+                        marginRight: '30px'
+                     }}
+                     
+                  >
+                     {showPassword ? 'Скрыть' : 'Показать'}
+                  </Button>
+               </Input.RightElement>
+            </Input.Group>
             {errorsForPassword()}
          </FormControl>
 
@@ -173,6 +194,7 @@ export const SignUp: React.FC<IProps> = ({submit}) => {
                width: '100%',
                marginTop: 20,
             }}
+            loading={isLoading}
          >
             Создать
          </PrimaryButton>

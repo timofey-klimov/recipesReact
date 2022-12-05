@@ -1,19 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signUpThunk } from "./auth.thunk";
+import { signUpThunk } from "./signUp.thunk";
 
-interface IAuthState {
+interface ISignUpState {
    isLoading: boolean,
    isError: boolean | null
 }
 
-const initialState: IAuthState = {
-   isLoading: false,
-   isError: null
+const initialState: ISignUpState = {
+   isError: null,
+   isLoading: false
 }
-const authSlice = createSlice({
-   name: 'auth',
+
+const signUpSlice = createSlice({
+   name: 'auth/signUp',
    initialState,
-   reducers: {},
+   reducers: {
+      
+   },
    extraReducers: (builder) => {
       builder
          .addCase(signUpThunk.pending, (state, action) => ({
@@ -34,4 +37,4 @@ const authSlice = createSlice({
    }
 })
 
-export default authSlice.reducer
+export default signUpSlice.reducer

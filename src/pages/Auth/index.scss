@@ -1,6 +1,8 @@
 .auth_form_wrapper {
    display: flex;
    justify-content: center;
+   z-index: 10000;
+   position: relative;
 
    .auth_form {
       height: 500px;
@@ -11,6 +13,8 @@
       padding-top: 15px;
       @media (max-width: 426px) {
          width: 100%;
+         height: 400px;
+         position: fixed;
       }
    }
 

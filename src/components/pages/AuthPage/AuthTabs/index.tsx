@@ -37,7 +37,7 @@ export const AuthTabs: React.FC<IProps> = ({tabs, className}) => {
                ))}
             </Tab.List>
             <Tab.Panels style={{
-               marginTop: 60,
+               marginTop: 40,
             }}>
                <div style={{
                   display: 'flex',

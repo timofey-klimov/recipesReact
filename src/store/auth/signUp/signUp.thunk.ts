@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { signUpAsync } from "../../core/api/user.api";
-import { authService } from "../../core/services/authService";
-import { SignUpRequest } from '../../models/auth/SignUpRequest';
+import { signUpAsync } from "../../../core/api/user.api";
+import { authService } from "../../../core/services/authService";
+import { SignUpRequest } from "../../../models/auth/SignUpRequest";
+
 
 export const signUpThunk = createAsyncThunk<void,SignUpRequest,{rejectValue: boolean}>(
    'auth/signUp',

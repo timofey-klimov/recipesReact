@@ -1,0 +1,11 @@
+.menu_item {
+   display: flex;
+   align-items: center;
+   padding: 10px;
+   transition: background-color 200ms ease-in;
+   cursor: pointer;
+
+   &:hover {
+      background-color: #E7E9E7;
+   }
+}

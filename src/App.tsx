@@ -9,14 +9,16 @@ import { RecipePage } from './pages/RecipePage';
 
 function App() {
   return (
-    <Routes>
-      <Route path='/' element={<Layout/>}>
-        <Route index element={<MainPage/>}/>
-        <Route path='create' element={<CreateRecipePage/>}/>
-        <Route path='recipe/:id' element={<RecipePage/>}/>
-        <Route path='auth' element={<AuthPage/>}/>
-      </Route>
-    </Routes>
+    <div>
+      <Routes>
+        <Route path='/' element={<Layout/>}>
+          <Route index element={<MainPage/>}/>
+          <Route path='create' element={<CreateRecipePage/>}/>
+          <Route path='recipe/:id' element={<RecipePage/>}/>
+          <Route path='auth' element={<AuthPage/>}/>
+        </Route>
+      </Routes>
+    </div>
   );
 }
 

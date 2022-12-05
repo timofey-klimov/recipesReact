@@ -4,7 +4,7 @@ import React from 'react';
 interface IProps extends React.PropsWithChildren, ButtonProps {
 }
 
-export const PrimaryButton: React.FC<IProps> = ({children, style, color, ...props}) => {
+export const PrimaryButton: React.FC<IProps> = ({children, style, color, loading, ...props}) => {
 
    const buttonProps = color 
       ? { 
@@ -24,7 +24,7 @@ export const PrimaryButton: React.FC<IProps> = ({children, style, color, ...prop
       }
    
    return (
-      <Button {...props} {...buttonProps}>
+      <Button {...props} {...buttonProps} loading={loading}>
          { children }
       </Button>
    )

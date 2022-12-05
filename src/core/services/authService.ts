@@ -2,6 +2,11 @@ export const authService = () => {
    const setToken = (token: string) => {
       localStorage.setItem('auth', token)
    }
+   const clear = () => {
+      if (localStorage.getItem('auth')) {
+         localStorage.removeItem('auth');
+      }
+   }
 
    const isAuth = localStorage.getItem('auth') != null;
 
@@ -10,6 +15,7 @@ export const authService = () => {
    return {
       isAuth,
       token,
-      setToken
+      setToken,
+      clear
    }
 }
