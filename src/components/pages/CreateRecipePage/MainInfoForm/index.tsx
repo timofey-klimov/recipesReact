@@ -76,8 +76,8 @@ export const RecipeMainInfoForm: React.FC = () => {
             imgDims={{
                maxHeight: 1200, 
                maxWidth: 1600,
-               minHeight: 600,
-               minWidth: 800,
+               minHeight: 400,
+               minWidth: 600,
             }}
             validationOpts={
                {shouldValidate: true}
