@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Menu from '../Menu';
 import './index.scss';
 
@@ -8,14 +8,21 @@ interface IProps {
 }
 
 const SideMenu: React.FC<IProps> = ({isOpen, close}) => {
-   
-   const classname = isOpen ? 'side_menu_wrapper' : 'side_menu_wrapper closed';
 
+   useEffect(() => {
+      const element = document.body;
+      if (isOpen) {
+         element.style.overflow = 'hidden'
+      } else {
+         element.style.overflow = 'auto'
+      }
+   }, [isOpen])
+   
    return (
-      <div className={classname} onClick={close}>
+      isOpen ? <div className='side_menu_wrapper' onClick={close}>
          <Menu 
             isOpen={isOpen}/>
-      </div>
+      </div> : null
    )
 }
 
